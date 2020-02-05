@@ -1,5 +1,3 @@
-package edu.ithaca.dragon.bank;
-
 public class BankAccount {
 
     private String email;
