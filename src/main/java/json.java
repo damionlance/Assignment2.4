@@ -25,14 +25,14 @@ public class json {
 
     }
 
-    public static BankAccount readAccountFromJSON(int acctId){
+    public static BankAccount readAccountFromJSON(String acctId){
         JSONParser parser = new JSONParser();
         try(Reader reader = new FileReader("src/main/resources/" + acctId + ".json")){
 
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             String email = (String) jsonObject.get("email");
             String password = (String) jsonObject.get("password");
-            long acctIdRead = (long) jsonObject.get("acctId");
+            String acctIdRead = (String) jsonObject.get("acctId");
             double balance = (double) jsonObject.get("balance");
 
             BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password);

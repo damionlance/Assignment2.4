@@ -1,14 +1,14 @@
 public class BankAccount {
 
     private String email;
-    private long acctId;
+    private String acctId;
     private String password;
     private double balance;
 
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public BankAccount(String email, double startingBalance, long acctId, String password){
+    public BankAccount(String email, double startingBalance, String acctId, String password){
         if (isAmountValid(startingBalance)){
             this.balance = startingBalance;
         }
@@ -36,7 +36,7 @@ public class BankAccount {
 
     public String getPassword() { return password; }
 
-    public long getAcctId() { return acctId; }
+    public String getAcctId() { return acctId; }
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
