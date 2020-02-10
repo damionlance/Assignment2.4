@@ -1,5 +1,3 @@
-package edu.ithaca.dragon.bank;
-
 //API to be used by ATMs
 public interface BasicAPI {
 
