@@ -1,12 +1,14 @@
 public class BankAccount {
 
     private String email;
+    private long acctId;
+    private String password;
     private double balance;
 
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public BankAccount(String email, double startingBalance){
+    public BankAccount(String email, double startingBalance, long acctId, String password){
         if (isAmountValid(startingBalance)){
             this.balance = startingBalance;
         }
@@ -19,6 +21,9 @@ public class BankAccount {
         else {
             throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
         }
+        // todo: Add JUnit tests to these, and make them actually check for validity
+        this.acctId = acctId;
+        this.password = password;
     }
 
     public double getBalance(){
@@ -28,6 +33,10 @@ public class BankAccount {
     public String getEmail(){
         return email;
     }
+
+    public String getPassword() { return password; }
+
+    public long getAcctId() { return acctId; }
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
@@ -125,4 +134,5 @@ public class BankAccount {
     public static void transfer(BankAccount accountToTransfer, double amountToTransfer){
 
     }
+
 }
