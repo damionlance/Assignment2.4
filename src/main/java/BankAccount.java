@@ -1,12 +1,12 @@
 public class BankAccount {
 
     private String email;
-    private double balance;
+    protected double balance;
 
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public BankAccount(String email, double startingBalance){
+    public BankAccount(String acctID, double startingBalance, String transactionHistory){
         if (isAmountValid(startingBalance)){
             this.balance = startingBalance;
         }
