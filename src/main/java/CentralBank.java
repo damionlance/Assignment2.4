@@ -60,7 +60,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         String password = in.nextLine();
 
         try {
-            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password, ""));
+            json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
         }
         catch(IllegalArgumentException e){
             System.out.println("Invalid field... Try again");

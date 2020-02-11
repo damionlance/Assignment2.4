@@ -47,10 +47,10 @@ class CentralBankTest {
 
     @Test
     void createAccountTest() {
-//        CentralBank newBank = new CentralBank();
-//        newBank.createAccount("12345", 500);
-//        BankAccount account = json.readAccountFromJSON("12345");
-//        assertEquals(account.getBalance(), 500);
+        CentralBank newBank = new CentralBank();
+        newBank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
+        assertEquals(account.getBalance(), 500);
     }
       
     @Test

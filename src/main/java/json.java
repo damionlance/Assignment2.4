@@ -10,7 +10,6 @@ public class json {
     public static void writeAccountToJSON(BankAccount accountToWrite){
         JSONObject obj = new JSONObject();
         obj.put("acctId", accountToWrite.getAcctId());
-        obj.put("email", accountToWrite.getEmail());
         obj.put("password", accountToWrite.getPassword());
         obj.put("balance", accountToWrite.getBalance());
 
@@ -27,12 +26,11 @@ public class json {
         try(Reader reader = new FileReader("src/main/resources/" + acctId + ".json")){
 
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            String email = (String) jsonObject.get("email");
             String password = (String) jsonObject.get("password");
             String acctIdRead = (String) jsonObject.get("acctId");
             double balance = (double) jsonObject.get("balance");
 
-            BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password, "");
+            BankAccount returnAccount = new BankAccount(balance, acctIdRead, password, "");
             return returnAccount;
         }
         catch (FileNotFoundException e) {
