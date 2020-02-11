@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -50,7 +51,13 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     }
 
     public void closeAccount(String acctId) {
-
+        try {
+            File file = new File("src/main/resources/" + acctId + ".json");
+            file.delete();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
