@@ -1,5 +1,7 @@
 import java.io.File;
 import java.util.Collection;
+import java.util.Scanner;
+
 
 public class CentralBank implements AdvancedAPI, AdminAPI {
 
@@ -34,6 +36,18 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     public void createAccount(String acctId, double startingBalance) {
 
+        Scanner in = new Scanner(System.in);
+        System.out.println("What email should be attached to this account: ");
+        String emailResponse = in.nextLine();
+        System.out.println("What password would you like: ");
+        String password = in.nextLine();
+
+        try {
+            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Invalid field... Try again");
+        }
     }
 
     public void closeAccount(String acctId) {
@@ -67,6 +81,12 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     public void unfreezeAcct(String acctId) {
 
+    }
+
+    public static void main(String[] args) {
+        CentralBank bank = new CentralBank();
+        bank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
     }
 
 }
