@@ -3,10 +3,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 
 public class json {
 
@@ -39,13 +36,12 @@ public class json {
             BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password);
             return returnAccount;
         }
-        catch (IOException e){
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-    return null;
+        return null;
     }
 
 }

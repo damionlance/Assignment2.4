@@ -8,7 +8,8 @@ public class BankAccount {
     /**
      * @throws IllegalArgumentException if email is invalid
      */
-    public BankAccount(String email, double startingBalance, String acctId, String password){
+    public BankAccount(String email, double startingBalance, String acctId, String password, string transactionHistory){
+
         if (isAmountValid(startingBalance)){
             this.balance = startingBalance;
         }

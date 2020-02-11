@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.Collection;
+import java.util.Scanner;
 
 public class CentralBank implements AdvancedAPI, AdminAPI {
 
@@ -28,11 +30,51 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         return null;
     }
 
+    public boolean isAmountVaild(amount){
+        String amountString = Double.toString(Math.abs(amount));
+        String[] splitter = amountString.toString().split("\\.");
+        splitter[0].length();   // Before Decimal Count
+        splitter[1].length();   // After  Decimal Count
+
+        if (amount <= 0){
+            return false;
+        }
+
+        else if(splitter[1].length() > 2){
+            return false;
+        }
+
+        else{
+            return true;
+        }
+    }
 
     //----------------- AdvancedAPI methods -------------------------//
 
     public void createAccount(String acctId, double startingBalance) {
 
+        Scanner in = new Scanner(System.in);
+        System.out.println("What email should be attached to this account: ");
+        String emailResponse = in.nextLine();
+        System.out.println("What password would you like: ");
+        String password = in.nextLine();
+
+        try {
+            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Invalid field... Try again");
+        }
+    }
+
+    public void closeAccount(String acctId) {
+        try {
+            File file = new File("src/main/resources/" + acctId + ".json");
+            file.delete();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeAccount(String acctId) {
@@ -62,5 +104,10 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
+    public static void main(String[] args) {
+        CentralBank bank = new CentralBank();
+        bank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
+    }
 
 }
