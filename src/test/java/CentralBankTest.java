@@ -62,4 +62,26 @@ class CentralBankTest {
         mybank.closeAccount(testAccount.getAcctId());
         //assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON(testAccount.getAcctId()));
     }
+
+    @Test
+    void getAccountsTest() {
+        CentralBank myBank = new CentralBank();
+
+        myBank.createAccount("111", 500, "pass");
+
+        String[] accounts = myBank.getAccountIDs();
+        boolean is111inAccount = false;
+        boolean is999inAccount = false;
+
+        for(String id : accounts){
+            if(id.equals("111")){
+                is111inAccount = true;
+            }
+            if(id.equals("999")){
+                is999inAccount = true;
+            }
+        }
+        assertTrue(is111inAccount);
+        assertFalse(is999inAccount);
+    }
 }

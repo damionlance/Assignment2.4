@@ -94,5 +94,13 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
+    public String[] getAccountIDs() {
+        File IDFolder = new File("src/main/resources/");
+        String[] files = IDFolder.list();
+        for(int i = 0; i < files.length; i++) {
+            files[i] = files[i].split("\\.")[0];
+        }
+        return files;
+    }
 
 }
