@@ -2,7 +2,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Scanner;
 
-
 public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- BasicAPI methods -------------------------//
@@ -31,6 +30,24 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         return null;
     }
 
+    public boolean isAmountVaild(amount){
+        String amountString = Double.toString(Math.abs(amount));
+        String[] splitter = amountString.toString().split("\\.");
+        splitter[0].length();   // Before Decimal Count
+        splitter[1].length();   // After  Decimal Count
+
+        if (amount <= 0){
+            return false;
+        }
+
+        else if(splitter[1].length() > 2){
+            return false;
+        }
+
+        else{
+            return true;
+        }
+    }
 
     //----------------- AdvancedAPI methods -------------------------//
 
@@ -58,6 +75,10 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void closeAccount(String acctId) {
+
     }
 
 
