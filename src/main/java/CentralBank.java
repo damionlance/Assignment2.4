@@ -51,11 +51,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- AdvancedAPI methods -------------------------//
 
-    public void createAccount(String acctId, double startingBalance) {
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("What password would you like: ");
-        String password = in.nextLine();
+    public void createAccount(String acctId, double startingBalance, String password) {
 
         try {
             json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
@@ -98,10 +94,5 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public static void main(String[] args) {
-        CentralBank bank = new CentralBank();
-        bank.createAccount("12345", 500);
-        BankAccount account = json.readAccountFromJSON("12345");
-    }
 
 }
