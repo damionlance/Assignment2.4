@@ -14,5 +14,6 @@ Assignment 2-4 for COMP 345
 
 create_account:
 
-
 ![create_account](/imagesForReadme/create_account_sequence.png)
+
+![](/imagesForReadme/kelsey_sequence_diagram.png)
