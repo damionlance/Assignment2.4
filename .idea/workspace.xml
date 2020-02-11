@@ -2,34 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb1cb946-55e6-4884-8172-10ca1a254dfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_launcher_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_runner_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_suite_api_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_vintage_junit_vintage_engine_4_12_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SoftwareEngineeringPractice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Cutomers" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/JsonForTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/ValidCustomer2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/ValidCustomer3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/json.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Customer1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Cutomers" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AdminTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Admin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+            <state relative-caret-position="198">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,11 +47,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/Customer1">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/AdminTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+            <state relative-caret-position="198">
+              <caret line="11" column="94" selection-start-line="11" selection-start-column="94" selection-end-line="11" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,9 +92,7 @@
         <option value="$PROJECT_DIR$/src/test/resources/Customer2.json" />
         <option value="$PROJECT_DIR$/src/test/resources/Customer1.json" />
         <option value="$PROJECT_DIR$/src/test/java/CentralBankTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/Cutomers" />
         <option value="$PROJECT_DIR$/src/main/java/json.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Admin.java" />
         <option value="$PROJECT_DIR$/src/test/java/JsonForTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/JsonForTests.java" />
         <option value="$PROJECT_DIR$/src/test/resources/ValidCustomers1.json" />
@@ -117,6 +101,9 @@
         <option value="$PROJECT_DIR$/src/test/resources/ValidCustomers2.json" />
         <option value="$PROJECT_DIR$/src/test/resources/ValidCustomers3" />
         <option value="$PROJECT_DIR$/src/test/java/AdminTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/Cutomers" />
+        <option value="$PROJECT_DIR$/src/main/resources/Customer1" />
       </list>
     </option>
   </component>
@@ -131,7 +118,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-12" />
     <option name="width" value="906" />
     <option name="height" value="975" />
@@ -141,7 +128,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
@@ -175,30 +161,11 @@
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="Assignment2.4" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="SoftwareEngineeringPractice" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Assignment2.4" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="SoftwareEngineeringPractice" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Assignment2.4" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="SoftwareEngineeringPractice" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -308,16 +275,11 @@
       <workItem from="1581373431327" duration="936000" />
       <workItem from="1581389470071" duration="286000" />
       <workItem from="1581390085571" duration="4429000" />
+      <workItem from="1581437144843" duration="1081000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.10 at 22h 45m 55s.xml">
-      <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.10 at 22h 46m 48s.xml">
-      <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.10 at 22h 47m 06s.xml">
       <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
     </history-entry>
@@ -342,24 +304,30 @@
     <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.10 at 23h 11m 32s.xml">
       <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.11 at 11h 10m 56s.xml">
+      <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AdminTest_freezeBankAccountTest - 2020.02.11 at 11h 17m 37s.xml">
+      <configuration name="AdminTest.freezeBankAccountTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13668000" />
+    <option name="totallyTimeSpent" value="14749000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26477733" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26963562" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.32962963" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.10185185" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.8537037" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4351852" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -367,16 +335,16 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.055555556" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49959514" visible="true" weight="0.62777776" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.50040483" side_tool="true" visible="true" weight="0.62777776" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32962963" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.32955465" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" weight="0.077732794" />
+      <window_info anchor="right" id="Maven" order="6" visible="true" weight="0.077732794" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
@@ -440,20 +408,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/BasicAPI.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/Customer2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/Customer3.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="78" lean-forward="true" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/Customer2.json" />
+    <entry file="file://$PROJECT_DIR$/src/test/resources/Customer3.json" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AdminAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -559,13 +515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Cutomers">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/InValidCustomers.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -619,8 +568,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/AdminTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+        <state relative-caret-position="198">
+          <caret line="11" column="94" selection-start-line="11" selection-start-column="94" selection-end-line="11" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -629,11 +578,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Admin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Cutomers">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Customer1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

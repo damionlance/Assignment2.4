@@ -9,9 +9,8 @@ public class AdminTest {
     @Test
     void freezeBankAccountTest(){
         BankAccount bankAccount1=JsonForTests.readAccountFromJSON(this.validAcc.get(0));
-        Admin admin1= new Admin(bankAccount1.getEmail(),bankAccount1.getPassword(),bankAccount1.getAcctId());
+        Admin admin1= new Admin("tempAdminPassword");//make a list of accepted admin passwords
         admin1.freezeAccount(bankAccount1.getAcctId());
-        b
 
     }
 

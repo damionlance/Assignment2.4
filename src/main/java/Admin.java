@@ -7,8 +7,9 @@ public class Admin implements AdminAPI{
     private ArrayList<BankAccount> accounts;
    // private ArrayList<Double> assets;//list of all assets for the user
     //TODO:CHANGE JSON TO NOT READ ACCOUNT ID
-    public Admin(String accountEmailIn, String adminPasswordIn, String accountIDIn){
+    public Admin( String adminPasswordIn){
         this.adminPassword =adminPasswordIn;
+
     }
 //TODO:ADD MAKE NEW ACCOUNT METHOD
     public double calcTotalAssets() {
