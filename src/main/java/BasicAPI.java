@@ -11,6 +11,6 @@ public interface BasicAPI {
 
     void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException;
 
-    String transactionHistory(String acctId);
+    void transactionHistory(String acctId);
 
 }

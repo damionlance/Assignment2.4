@@ -26,11 +26,11 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public String transactionHistory(String acctId) {
-        return null;
+    public void transactionHistory(String acctId) {
+
     }
 
-    public boolean isAmountVaild(amount){
+    public boolean isAmountVaild(double amount){
         String amountString = Double.toString(Math.abs(amount));
         String[] splitter = amountString.toString().split("\\.");
         splitter[0].length();   // Before Decimal Count
@@ -60,7 +60,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         String password = in.nextLine();
 
         try {
-            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password, ""));
         }
         catch(IllegalArgumentException e){
             System.out.println("Invalid field... Try again");
@@ -75,10 +75,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void closeAccount(String acctId) {
-
     }
 
 
