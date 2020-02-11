@@ -1,0 +1,19 @@
+[
+  {"password":"myPassword",
+    "balance":500.0,
+    "acctId":"TestCustomer1",
+    "email":"testAcc1@c.com"}
+,
+
+  {"password":"myPassword1",
+    "balance":50.0,
+    "acctId":"TestCustomer2",
+    "email":"testAcc2@c.com"}
+
+,
+
+  {"password":"myPassword2",
+    "balance":800.0,
+    "acctId":"TestCustomer3",
+    "email":"testAcc3@c.com"}
+]

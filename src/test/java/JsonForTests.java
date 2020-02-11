@@ -1,4 +1,3 @@
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -8,9 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 
-public class json {
-
-
+public class JsonForTests {
     public static void writeAccountToJSON(BankAccount accountToWrite){
         JSONObject obj = new JSONObject();
         obj.put("acctId", accountToWrite.getAcctId());
@@ -18,7 +15,7 @@ public class json {
         obj.put("password", accountToWrite.getPassword());
         obj.put("balance", accountToWrite.getBalance());
 
-        try (FileWriter file = new FileWriter("src/main/resources/" + accountToWrite.getAcctId() + ".json")) {
+        try (FileWriter file = new FileWriter("src/test/resources/" + accountToWrite.getAcctId() + ".json")) {
             file.write(obj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -28,7 +25,7 @@ public class json {
 
     public static BankAccount readAccountFromJSON(String acctId){
         JSONParser parser = new JSONParser();
-        try(Reader reader = new FileReader("src/main/resources/" + acctId + ".json")){
+        try(Reader reader = new FileReader("src/test/resources/" + acctId + ".json")){
 
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             String email = (String) jsonObject.get("email");
@@ -45,7 +42,7 @@ public class json {
         catch (ParseException e) {
             e.printStackTrace();
         }
-    return null;
+        return null;
     }
 
 }
