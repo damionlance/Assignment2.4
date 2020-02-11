@@ -18,4 +18,12 @@ class CentralBankTest {
         assertEquals(testAccount.getBalance(), returnedAccount.getBalance());
 
     }
+
+    @Test
+    void createAccountTest() {
+        CentralBank newBank = new CentralBank();
+        newBank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
+        assertEquals(account.getBalance(), 500);
+    }
 }
