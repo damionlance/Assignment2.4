@@ -34,6 +34,7 @@ public class BankAccount {
         return email;
     }
 
+
     public String getPassword() { return password; }
 
     public String getAcctId() { return acctId; }
