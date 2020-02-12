@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -57,17 +58,17 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
             json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
         }
         catch(IllegalArgumentException e){
-            System.out.println("Invalid field... Try again");
+            throw new IllegalArgumentException("Illegal argument in the BankAccount constructor");
         }
     }
 
-    public void closeAccount(String acctId) {
-        try {
-            File file = new File("src/main/resources/" + acctId + ".json");
+    public void closeAccount(String acctId) throws FileNotFoundException {
+        File file = new File("src/main/resources/" + acctId + ".json");
+        if(file.exists()){
             file.delete();
         }
-        catch(Exception e) {
-            e.printStackTrace();
+        else {
+            throw new FileNotFoundException("Account does not exist");
         }
     }
 

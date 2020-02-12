@@ -21,24 +21,17 @@ public class json {
 
     }
 
-    public static BankAccount readAccountFromJSON(String acctId){
+    public static BankAccount readAccountFromJSON(String acctId) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        try(Reader reader = new FileReader("src/main/resources/" + acctId + ".json")){
+        Reader reader = new FileReader("src/main/resources/" + acctId + ".json");
 
-            JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            String password = (String) jsonObject.get("password");
-            String acctIdRead = (String) jsonObject.get("acctId");
-            double balance = (double) jsonObject.get("balance");
+        JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        String password = (String) jsonObject.get("password");
+        String acctIdRead = (String) jsonObject.get("acctId");
+        double balance = (double) jsonObject.get("balance");
 
-            BankAccount returnAccount = new BankAccount(balance, acctIdRead, password, "");
-            return returnAccount;
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+        BankAccount returnAccount = new BankAccount(balance, acctIdRead, password, "");
+        return returnAccount;
     }
 
 }
