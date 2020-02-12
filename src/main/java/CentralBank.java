@@ -1,12 +1,15 @@
+import org.json.simple.parser.ParseException;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
-import java.util.Scanner;
 
 public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- BasicAPI methods -------------------------//
 
-    public boolean confirmCredentials(String acctId, String password) {
+    public boolean confirmCredentials(String acctId, String password) throws IOException, ParseException {
         //just comparing on file accountID and password
 
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
@@ -23,7 +26,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         }
     }
 
-    public double checkBalance(String acctId) {
+    public double checkBalance(String acctId) throws IOException, ParseException {
 
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
 
@@ -36,7 +39,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public void withdraw(String acctId, double amount) throws IllegalArgumentException {
+    public void withdraw(String acctId, double amount) throws IllegalArgumentException, IOException, ParseException, InsufficientFundsException {
         String amountString = Double.toString(Math.abs(amount));
         String[] splitter = amountString.toString().split("\\.");
         splitter[0].length();   // Before Decimal Count
@@ -60,7 +63,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public void deposit(String acctId, double amount) {
+    public void deposit(String acctId, double amount) throws IOException, ParseException {
         if (isAmountValid(amount)) {
             BankAccount returnedAccount = json.readAccountFromJSON(acctId);
             returnedAccount.deposit(amount);
@@ -74,7 +77,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException {
+    public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException, IOException, ParseException {
         if (isAmountValid(amount)) {
 
             BankAccount giveAccount = json.readAccountFromJSON(acctIdToWithdrawFrom);
@@ -102,13 +105,12 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         }
     }
 
-    public String transactionHistory(String acctId) {
+    public void transactionHistory(String acctId) throws IOException, ParseException {
 
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
 
-        String transHistory = returnedAccount.getTransactionHistory();
+        String transHistory = (String) returnedAccount.getTransactionHistory();
 
-        return transHistory;
     }
 
     public static boolean isAmountValid(double checkNum){
@@ -134,36 +136,24 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- AdvancedAPI methods -------------------------//
 
-    public void createAccount(String acctId, double startingBalance) {
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("What email should be attached to this account: ");
-        String emailResponse = in.nextLine();
-        System.out.println("What password would you like: ");
-        String password = in.nextLine();
-
+    public void createAccount(String acctId, double startingBalance, String password) {
         try {
-            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+            json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
         }
         catch(IllegalArgumentException e){
-            System.out.println("Invalid field... Try again");
+            throw new IllegalArgumentException("Illegal argument in the BankAccount constructor");
         }
     }
 
-    public void closeAccount(String acctId) {
-        try {
-            File file = new File("src/main/resources/" + acctId + ".json");
+    public void closeAccount(String acctId) throws FileNotFoundException {
+        File file = new File("src/main/resources/" + acctId + ".json");
+        if(file.exists()){
             file.delete();
         }
-        catch(Exception e) {
-            e.printStackTrace();
+        else {
+            throw new FileNotFoundException("Account does not exist");
         }
     }
-
-    public void closeAccount(String acctId) {
-
-    }
-
 
     //------------------ AdminAPI methods -------------------------//
 
@@ -171,10 +161,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         return 0;
     }
 
-<<<<<<< HEAD
-    @Override
-=======
->>>>>>> 8fae3c11e7042c21b879993386c10383a839ca36
     public double calcTotalAssets() {
         return 0;
     }
@@ -191,10 +177,13 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public static void main(String[] args) {
-        CentralBank bank = new CentralBank();
-        bank.createAccount("12345", 500);
-        BankAccount account = json.readAccountFromJSON("12345");
+    public String[] getAccountIDs() {
+        File IDFolder = new File("src/main/resources/");
+        String[] files = IDFolder.list();
+        for(int i = 0; i < files.length; i++) {
+            files[i] = files[i].split("\\.")[0];
+        }
+        return files;
     }
 
 }

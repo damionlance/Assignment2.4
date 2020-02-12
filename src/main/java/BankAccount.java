@@ -1,6 +1,5 @@
 public class BankAccount {
 
-    private String email;
     private String acctId;
     private String password;
     private String transactionHistory;
@@ -17,12 +16,12 @@ public class BankAccount {
         else {
             throw new IllegalArgumentException("Amount: " + startingBalance + " is invalid");
         }
-        if (isEmailValid(email)){
-            this.email = email;
-        }
-        else {
-            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
-        }
+//        if (isEmailValid(email)){
+//            this.email = email;
+//        }
+//        else {
+//            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
+//        }
         // todo: Add JUnit tests to these, and make them actually check for validity
         this.acctId = acctId;
         this.password = password;
@@ -33,7 +32,7 @@ public class BankAccount {
         return balance;
     }
 
-    public String getEmail(){ return email; }
+//    public String getEmail(){ return email; }
 
     public String getPassword() { return password; }
 
