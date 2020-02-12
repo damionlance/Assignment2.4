@@ -45,6 +45,7 @@ class CentralBankTest {
         json.writeAccountToJSON(testAccount);
         BankAccount returnedAccount = json.readAccountFromJSON("123");
         assertEquals(testAccount.getBalance(), returnedAccount.getBalance());
+        assertEquals(testAccount.getPassword(), returnedAccount.getPassword());
 
         //invalid account Id
         assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON("99999999"));
@@ -54,12 +55,12 @@ class CentralBankTest {
     void createAccountTest() throws IOException, org.json.simple.parser.ParseException {
         CentralBank bank = new CentralBank();
 
-        //valid account
+        //valid account - valid starting balance (only way for account to be valid right now)
         bank.createAccount("12345", 500, "password");
         BankAccount account = json.readAccountFromJSON("12345");
         assertEquals(500, account.getBalance());
 
-        //invalid account
+        //invalid account - invalid starting balance
         assertThrows(IllegalArgumentException.class, ()->bank.createAccount("12345", 0, "pass"));
 
     }
@@ -95,7 +96,9 @@ class CentralBankTest {
                 is999inAccount = true;
             }
         }
+        //valid test - account 111 is in the bank
         assertTrue(is111inAccount);
+        //invalid test - account 999 is not in the bank
         assertFalse(is999inAccount);
     }
 }

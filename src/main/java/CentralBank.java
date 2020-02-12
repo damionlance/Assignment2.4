@@ -53,7 +53,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     //----------------- AdvancedAPI methods -------------------------//
 
     public void createAccount(String acctId, double startingBalance, String password) {
-
         try {
             json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
         }
