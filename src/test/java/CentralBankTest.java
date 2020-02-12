@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CentralBankTest {
@@ -33,19 +36,14 @@ class CentralBankTest {
     }
 
     @Test
-    void confirmCredentialsTest(){
-
-    }
-
-    @Test
     void checkBalanceTest(){
-        BankAccount bankAccount = new BankAccount("abcde", 100, "");
-        BankAccount bankAccount1 = new BankAccount("abcde", 1, "");
-        BankAccount bankAccount2 = new BankAccount("abcde", 1.00, "");
-        BankAccount bankAccount3 = new BankAccount("abcde", 1.000, "");
-        BankAccount bankAccount4 = new BankAccount("abcde", 1.0, "");
-        BankAccount bankAccount5 = new BankAccount("abcde", 0, "");
-        BankAccount bankAccount6 = new BankAccount("abcde", 0.01, "");
+        BankAccount bankAccount = new BankAccount(100, "abcd", "1234", "");
+        BankAccount bankAccount1 = new BankAccount(1, "efgh", "5678", "");
+        BankAccount bankAccount2 = new BankAccount(1.00, "ijkl", "9012", "");
+        BankAccount bankAccount3 = new BankAccount(1.000, "mnop", "3456", "");
+        BankAccount bankAccount4 = new BankAccount(1.0, "qrst", "7890", "");
+        BankAccount bankAccount5 = new BankAccount(0, "uvwx", "12345", "");
+        BankAccount bankAccount6 = new BankAccount(0.01, "yzabc", "67890", "");
 
         assertEquals(100, bankAccount.getBalance());
         assertEquals(1, bankAccount1.getBalance()); //border
@@ -58,8 +56,8 @@ class CentralBankTest {
     }
 
     @Test
-    void withdrawTest(){
-        BankAccount bankAccount = new BankAccount("abcde", 200, "");
+    void withdrawTest() throws InsufficientFundsException {
+        BankAccount bankAccount = new BankAccount(200, "abcde", "1234", "");
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance());
@@ -68,11 +66,11 @@ class CentralBankTest {
         // Equivalence Class: amount > balance
         // Border Case: No
         //overdraw positive account test
-        BankAccount bankAccount1 = new BankAccount("abcmailcom", 10, "");
+        BankAccount bankAccount1 = new BankAccount(10, "abcd", "1234", "");
         assertThrows(RuntimeException.class, ()-> bankAccount1.withdraw(40));
 
         //overdraw negative account test
-        BankAccount bankAccount2 = new BankAccount("abcdmailcom", -10, "");
+        BankAccount bankAccount2 = new BankAccount(-10, "efgh", "5678", "");
         // Equivalence Class: amount > balance
         // Border Case: No
         assertThrows(RuntimeException.class, ()-> bankAccount2.withdraw(200));
@@ -80,13 +78,13 @@ class CentralBankTest {
         // Equivalence Class: amount < balance, amount positive
         // Border Case: No
         //successful withdraw test
-        BankAccount bankAccount3 = new BankAccount("abcdemailcom", 100, "");
+        BankAccount bankAccount3 = new BankAccount(100, "asdfghjkjhgfd", "123456", "");
         bankAccount3.withdraw(20);
 
         assertEquals(80, bankAccount3.getBalance());
 
         //negative tests
-        BankAccount bankAccount4 = new BankAccount("abcmailcom", 10, "");
+        BankAccount bankAccount4 = new BankAccount(10, "abcmailcom", "456789", "");
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-0.01));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-0.00));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-0.10));
@@ -94,7 +92,7 @@ class CentralBankTest {
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-0.0001));
 
         //positive tests
-        BankAccount bankAccount6 = new BankAccount("abcmailcom", 1000, "");
+        BankAccount bankAccount6 = new BankAccount(1000, "jhtyjhfgtyh", "544767875", "");
         bankAccount6.withdraw(0.01);
         assertEquals(999.99, bankAccount6.getBalance());
 
@@ -106,7 +104,7 @@ class CentralBankTest {
 
 
         //valid decimal points
-        BankAccount bankAccount5 = new BankAccount("abcmailcom", 1000, "");
+        BankAccount bankAccount5 = new BankAccount(1000, "jaguar", "hammerhead", "");
         bankAccount5.withdraw(0.01);
         assertEquals(999.99, bankAccount5.getBalance());
 
@@ -123,7 +121,7 @@ class CentralBankTest {
         assertEquals(969.89, bankAccount5.getBalance());
 
         //non-valid decimal points
-        BankAccount bankAccount7 = new BankAccount("abcmailcom", 10, "");
+        BankAccount bankAccount7 = new BankAccount(10, "cheetah", "rhino", "");
         assertThrows(IllegalArgumentException.class, ()-> bankAccount7.withdraw(0.001));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount7.withdraw(0.0001));
         assertThrows(IllegalArgumentException.class, ()-> bankAccount7.withdraw(0.00001));
@@ -134,7 +132,7 @@ class CentralBankTest {
 
     @Test
     void depositTest(){
-        BankAccount BankAccount = new BankAccount("a@b.com", 200, "");
+        BankAccount BankAccount = new BankAccount(200, "elephant", "zebra", "");
 
         //positive amounts
         BankAccount.deposit(0.01); //border
@@ -152,7 +150,7 @@ class CentralBankTest {
 
         //negative and zero amounts
 
-        BankAccount BankAccount2 = new BankAccount("abcom", 100, "");
+        BankAccount BankAccount2 = new BankAccount(100, "toucan", "sloth", "");
         assertThrows(IllegalArgumentException.class, ()-> BankAccount2.deposit(0.00)); //border
         assertThrows(IllegalArgumentException.class, ()-> BankAccount2.deposit(-0.01)); //border
         assertThrows(IllegalArgumentException.class, ()-> BankAccount2.deposit(-0.10));
@@ -163,7 +161,7 @@ class CentralBankTest {
 
         //valid decimal point
 
-        BankAccount BankAccount3 = new BankAccount("anbcom", 100, "");
+        BankAccount BankAccount3 = new BankAccount(100, "meerkat", "lion", "");
 
         BankAccount3.deposit(0.01);
         assertEquals(100.01, BankAccount3.getBalance());
@@ -189,7 +187,7 @@ class CentralBankTest {
 
         //non-valid decimal point
 
-        BankAccount BankAccount4 = new BankAccount("awbcom", 100, "");
+        BankAccount BankAccount4 = new BankAccount(100, "jackrabbit", "chinchilla", "");
 
         assertThrows(IllegalArgumentException.class, ()-> BankAccount4.deposit(0.000)); //border
         assertThrows(IllegalArgumentException.class, ()-> BankAccount4.deposit(0.001)); //border
@@ -197,13 +195,24 @@ class CentralBankTest {
         assertThrows(IllegalArgumentException.class, ()-> BankAccount4.deposit(0.00001));
         assertThrows(IllegalArgumentException.class, ()-> BankAccount4.deposit(0.1234));
 
+
+=======
+    void JSONReadWrite() {
+        BankAccount testAccount = new BankAccount("a.b@c.com", 500, "123", "myPassword");
+
+        json.writeAccountToJSON(testAccount);
+        BankAccount returnedAccount = json.readAccountFromJSON("123");
+        assertEquals(testAccount.getBalance(), returnedAccount.getBalance());
+>>>>>>> 8fae3c11e7042c21b879993386c10383a839ca36
+
     }
 
     @Test
+<<<<<<< HEAD
     void tranferTest(){
 
         BankAccount BankAccount1 = new BankAccount("12345", 100, "");
-        BankAccount BankAccount2 = new BankAccount("67890", 100, "");
+        BankAccount bankAccount2 = new BankAccount("67890", 100, "");
 
         BankAccount BankAccount3 = new BankAccount("abcde", 100, "");
         BankAccount BankAccount4 = new BankAccount("fghi", 100, "");
@@ -218,4 +227,22 @@ class CentralBankTest {
 
     }
 
+=======
+    @Test
+    void createAccountTest() {
+        CentralBank newBank = new CentralBank();
+        newBank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
+        assertEquals(account.getBalance(), 500);
+      
+    @Test
+    void closeAccount() {
+        BankAccount testAccount = new BankAccount("a.b@c.com", 500, "123", "myPassword");
+        CentralBank mybank = new CentralBank();
+
+        json.writeAccountToJSON(testAccount);
+        mybank.closeAccount(testAccount.getAcctId());
+        //assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON(testAccount.getAcctId()));
+    }
+>>>>>>> 8fae3c11e7042c21b879993386c10383a839ca36
 }

@@ -1,56 +1,73 @@
+import java.io.File;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class CentralBank implements AdvancedAPI, AdminAPI, BankAccount {
+public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- BasicAPI methods -------------------------//
 
-    Scanner user_input = new Scanner( System.in );
-
     public boolean confirmCredentials(String acctId, String password) {
+        //just comparing on file accountID and password
 
-        String enteredAcctID = user_input.next();
-        String enteredPassword = user_input.next();
+        BankAccount returnedAccount = json.readAccountFromJSON(acctId);
 
-        if (enteredAcctID.equals(acctId) && enteredPassword.equals(password)){
+        String acctIDonFile = returnedAccount.getAcctId();
+        String passwordOnFile = returnedAccount.getPassword();
 
+        if(acctIDonFile.equals(acctId) && passwordOnFile.equals(password)){
+
+            return true;
         }
-
         else{
-            throw new IllegalArgumentException("ERROR: Incorrect account ID or password");
+            return false;
         }
-
-
     }
 
     public double checkBalance(String acctId) {
-        return 0;
+
+        BankAccount returnedAccount = json.readAccountFromJSON(acctId);
+
+        double accountBalance = returnedAccount.getBalance();
+
+        String checkBalanceUpdate = "Checked balance. Balance at " + accountBalance + "\n";
+        returnedAccount.updateTransactionHistory(checkBalanceUpdate);
+
+        return accountBalance;
+
     }
 
-    public void withdraw(String acctId, double amount) throws InsufficientFundsException {
+    public void withdraw(String acctId, double amount) throws IllegalArgumentException {
         String amountString = Double.toString(Math.abs(amount));
         String[] splitter = amountString.toString().split("\\.");
         splitter[0].length();   // Before Decimal Count
         splitter[1].length();   // After  Decimal Count
 
+        BankAccount returnedAccount = json.readAccountFromJSON(acctId);
+        double balance = returnedAccount.getBalance();
+
         if (amount > balance) {
             //change to insufficientFundsException
             throw new RuntimeException("ERROR: You do not have enough funds to withdraw that amount.");
         } else if (isAmountValid(amount)) {
-            balance -= amount;
+            returnedAccount.withdraw(amount);
             //append action to transaction history
+            String withdrawNotice = "Withdrew " + amount + " from account " + acctId + "\n";
+            returnedAccount.updateTransactionHistory(withdrawNotice);
         } else {
             throw new IllegalArgumentException("ERROR: Invalid withdraw amount");
 
         }
 
-
     }
 
     public void deposit(String acctId, double amount) {
         if (isAmountValid(amount)) {
+            BankAccount returnedAccount = json.readAccountFromJSON(acctId);
+            returnedAccount.deposit(amount);
 
-            balance += amount;
+            String depositNotice = "Deposited " + amount + " to " + acctId + "\n";
+
+            returnedAccount.updateTransactionHistory(depositNotice);
         } else {
             throw new IllegalArgumentException("ERROR: Invalid deposit amount");
         }
@@ -59,49 +76,88 @@ public class CentralBank implements AdvancedAPI, AdminAPI, BankAccount {
 
     public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException {
         if (isAmountValid(amount)) {
-            double acct1 = acctIdToWithdrawFrom.balance;
-            double acct2 = acctIdToDepositTo.balance;
 
-            acct1 -= amount;
-            acct2 += amount;
+            BankAccount giveAccount = json.readAccountFromJSON(acctIdToWithdrawFrom);
+            BankAccount getAccount = json.readAccountFromJSON(acctIdToDepositTo);
 
-            acctIdToWithdrawFrom.balance = acct1;
-            acctIdToDepositTo.balance = acct2;
+            double giveBalance = giveAccount.getBalance();
 
-            transactionHistory.append("Transfered " + amount + "from " + acctIdToWithdrawFrom + "to " + acctIdToDepositTo);
+            if (amount <= giveBalance) {
+
+                giveAccount.withdraw(amount);
+                getAccount.deposit(amount);
+
+                String history = giveAccount.getTransactionHistory();
+
+                String sendTransferNotice = "Transferred $" + amount + " from " + acctIdToWithdrawFrom + " to "
+                        + acctIdToDepositTo + "\n";
+                giveAccount.updateTransactionHistory(sendTransferNotice);
+
+                String recieveTransferNotice = "Received $" + amount + " from " + acctIdToWithdrawFrom + "\n";
+                getAccount.updateTransactionHistory(recieveTransferNotice);
+            }
         } else {
-            throw new InsufficientFundsException;
+            //fix dis
+            throw new RuntimeException();
         }
     }
 
     public String transactionHistory(String acctId) {
-        return null;
+
+        BankAccount returnedAccount = json.readAccountFromJSON(acctId);
+
+        String transHistory = returnedAccount.getTransactionHistory();
+
+        return transHistory;
     }
 
-    public boolean isAmountVaild(amount){
-        String amountString = Double.toString(Math.abs(amount));
-        String[] splitter = amountString.toString().split("\\.");
-        splitter[0].length();   // Before Decimal Count
-        splitter[1].length();   // After  Decimal Count
-
-        if (amount <= 0){
+    public static boolean isAmountValid(double checkNum){
+        if(checkNum <= 0){
             return false;
         }
-
-        else if(splitter[1].length() > 2){
+        String checkNumStr = "" + checkNum;
+        String[] delimitedStr = checkNumStr.split(".");
+        int indexOfDot = checkNumStr.indexOf('.');
+        if(indexOfDot == -1){
+            return true;
+        }
+        else if(checkNumStr.length() - indexOfDot - 1 > 2){
             return false;
         }
-
         else{
             return true;
         }
+
     }
+
 
 
     //----------------- AdvancedAPI methods -------------------------//
 
     public void createAccount(String acctId, double startingBalance) {
 
+        Scanner in = new Scanner(System.in);
+        System.out.println("What email should be attached to this account: ");
+        String emailResponse = in.nextLine();
+        System.out.println("What password would you like: ");
+        String password = in.nextLine();
+
+        try {
+            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Invalid field... Try again");
+        }
+    }
+
+    public void closeAccount(String acctId) {
+        try {
+            File file = new File("src/main/resources/" + acctId + ".json");
+            file.delete();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeAccount(String acctId) {
@@ -115,7 +171,10 @@ public class CentralBank implements AdvancedAPI, AdminAPI, BankAccount {
         return 0;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 8fae3c11e7042c21b879993386c10383a839ca36
     public double calcTotalAssets() {
         return 0;
     }
@@ -130,6 +189,12 @@ public class CentralBank implements AdvancedAPI, AdminAPI, BankAccount {
 
     public void unfreezeAcct(String acctId) {
 
+    }
+
+    public static void main(String[] args) {
+        CentralBank bank = new CentralBank();
+        bank.createAccount("12345", 500);
+        BankAccount account = json.readAccountFromJSON("12345");
     }
 
 }
