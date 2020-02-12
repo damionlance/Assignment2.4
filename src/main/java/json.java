@@ -33,7 +33,7 @@ public class json {
             String acctIdRead = (String) jsonObject.get("acctId");
             double balance = (double) jsonObject.get("balance");
 
-            BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password);
+            BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password,"");
             return returnAccount;
         }
         catch (FileNotFoundException e) {
