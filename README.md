@@ -17,3 +17,7 @@ create_account:
 ![create_account](/imagesForReadme/create_account_sequence.png)
 
 ![](/imagesForReadme/kelsey_sequence_diagram.png)
+
+freeze/unfrees account:
+
+![freeze/unfreeze account](/imagesForReadme/freezeAccount.png)
