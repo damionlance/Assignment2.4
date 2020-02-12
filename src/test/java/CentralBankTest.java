@@ -51,7 +51,7 @@ class CentralBankTest {
         newBank.createAccount("12345", 500);
         BankAccount account = json.readAccountFromJSON("12345");
         assertEquals(account.getBalance(), 500);
-      
+    }
     @Test
     void closeAccount() {
         BankAccount testAccount = new BankAccount("a.b@c.com", 500, "123", "myPassword");

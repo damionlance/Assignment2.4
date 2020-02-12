@@ -22,5 +22,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-launcher:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-suite-api:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.vintage:junit-vintage-engine:4.12.0" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
   </component>
 </module>

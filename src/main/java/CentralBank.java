@@ -30,7 +30,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         return null;
     }
 
-    public boolean isAmountVaild(amount){
+    public boolean isAmountVaild(double amount){
         String amountString = Double.toString(Math.abs(amount));
         String[] splitter = amountString.toString().split("\\.");
         splitter[0].length();   // Before Decimal Count
@@ -76,11 +76,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
             e.printStackTrace();
         }
     }
-
-    public void closeAccount(String acctId) {
-
-    }
-
 
     //------------------ AdminAPI methods -------------------------//
 
