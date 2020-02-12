@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -26,8 +27,8 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public String transactionHistory(String acctId) {
-        return null;
+    public void transactionHistory(String acctId) {
+
     }
 
     public boolean isAmountVaild(double amount){
@@ -51,29 +52,23 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     //----------------- AdvancedAPI methods -------------------------//
 
-    public void createAccount(String acctId, double startingBalance) {
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("What email should be attached to this account: ");
-        String emailResponse = in.nextLine();
-        System.out.println("What password would you like: ");
-        String password = in.nextLine();
+    public void createAccount(String acctId, double startingBalance, String password) {
 
         try {
-            json.writeAccountToJSON(new BankAccount(emailResponse, startingBalance, acctId, password));
+            json.writeAccountToJSON(new BankAccount(startingBalance, acctId, password, ""));
         }
         catch(IllegalArgumentException e){
-            System.out.println("Invalid field... Try again");
+            throw new IllegalArgumentException("Illegal argument in the BankAccount constructor");
         }
     }
 
-    public void closeAccount(String acctId) {
-        try {
-            File file = new File("src/main/resources/" + acctId + ".json");
+    public void closeAccount(String acctId) throws FileNotFoundException {
+        File file = new File("src/main/resources/" + acctId + ".json");
+        if(file.exists()){
             file.delete();
         }
-        catch(Exception e) {
-            e.printStackTrace();
+        else {
+            throw new FileNotFoundException("Account does not exist");
         }
     }
 
@@ -99,10 +94,13 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     }
 
-    public static void main(String[] args) {
-        CentralBank bank = new CentralBank();
-        bank.createAccount("12345", 500);
-        BankAccount account = json.readAccountFromJSON("12345");
+    public String[] getAccountIDs() {
+        File IDFolder = new File("src/main/resources/");
+        String[] files = IDFolder.list();
+        for(int i = 0; i < files.length; i++) {
+            files[i] = files[i].split("\\.")[0];
+        }
+        return files;
     }
 
 }

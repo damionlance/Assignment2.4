@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,29 +38,64 @@ class CentralBankTest {
     }
 
     @Test
-    void JSONReadWrite() {
-        BankAccount testAccount = new BankAccount("a.b@c.com", 500, "123", "myPassword");
+    void JSONReadWrite() throws IOException, org.json.simple.parser.ParseException {
+        BankAccount testAccount = new BankAccount(500, "123", "myPassword", "");
 
+        //valid account Id
         json.writeAccountToJSON(testAccount);
         BankAccount returnedAccount = json.readAccountFromJSON("123");
         assertEquals(testAccount.getBalance(), returnedAccount.getBalance());
 
+        //invalid account Id
+        assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON("99999999"));
     }
 
     @Test
-    void createAccountTest() {
-        CentralBank newBank = new CentralBank();
-        newBank.createAccount("12345", 500);
+    void createAccountTest() throws IOException, org.json.simple.parser.ParseException {
+        CentralBank bank = new CentralBank();
+
+        //valid account
+        bank.createAccount("12345", 500, "password");
         BankAccount account = json.readAccountFromJSON("12345");
-        assertEquals(account.getBalance(), 500);
-    }
-    @Test
-    void closeAccount() {
-        BankAccount testAccount = new BankAccount("a.b@c.com", 500, "123", "myPassword");
-        CentralBank mybank = new CentralBank();
+        assertEquals(500, account.getBalance());
 
-        json.writeAccountToJSON(testAccount);
-        mybank.closeAccount(testAccount.getAcctId());
-        //assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON(testAccount.getAcctId()));
+        //invalid account
+        assertThrows(IllegalArgumentException.class, ()->bank.createAccount("12345", 0, "pass"));
+
+    }
+
+    @Test
+    void closeAccount() throws FileNotFoundException {
+        CentralBank bank = new CentralBank();
+
+        //valid account
+        bank.createAccount("12345", 500, "password");
+        bank.closeAccount("12345");
+
+        //invalid account
+        assertThrows(FileNotFoundException.class, ()->bank.closeAccount("12345"));
+
+    }
+
+    @Test
+    void getAccountsTest() {
+        CentralBank myBank = new CentralBank();
+
+        myBank.createAccount("111", 500, "pass");
+
+        String[] accounts = myBank.getAccountIDs();
+        boolean is111inAccount = false;
+        boolean is999inAccount = false;
+
+        for(String id : accounts){
+            if(id.equals("111")){
+                is111inAccount = true;
+            }
+            if(id.equals("999")){
+                is999inAccount = true;
+            }
+        }
+        assertTrue(is111inAccount);
+        assertFalse(is999inAccount);
     }
 }

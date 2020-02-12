@@ -24,7 +24,7 @@ public class BasicBank implements BasicAPI {
     }
 
     public double checkBalance(String acctId) {
-
+        return 0;
     }
 
     public void withdraw(String acctId, double amount) throws InsufficientFundsException {
@@ -59,26 +59,26 @@ public class BasicBank implements BasicAPI {
 
     public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException {
 
-        if (isAmountValid(amount)) {
-            double acct1 = acctIdToWithdrawFrom.balance;
-            double acct2 = acctIdToDepositTo.balance;
-
-            acct1 -= amount;
-            acct2 += amount;
-
-            acctIdToWithdrawFrom.balance = acct1;
-            acctIdToDepositTo.balance = acct2;
-
-            transactionHistory.append("Transfered " + amount + "from " + acctIdToWithdrawFrom + "to " + acctIdToDepositTo);
-        } else {
-            throw new InsufficientFundsException;
-        }
+//        if (isAmountValid(amount)) {
+//            double acct1 = acctIdToWithdrawFrom.balance;
+//            double acct2 = acctIdToDepositTo.balance;
+//
+//            acct1 -= amount;
+//            acct2 += amount;
+//
+//            acctIdToWithdrawFrom.balance = acct1;
+//            acctIdToDepositTo.balance = acct2;
+//
+//            transactionHistory.append("Transfered " + amount + "from " + acctIdToWithdrawFrom + "to " + acctIdToDepositTo);
+//        } else {
+//            throw new InsufficientFundsException;
+//        }
     }
 
-    public String transactionHistory(String acctId) {
-        print("Transaction history for" + acctId + ": " + transactionHistory);
-
-        return transactionHistory;
+    public void transactionHistory(String acctId) {
+//        print("Transaction history for" + acctId + ": " + transactionHistory);
+//
+//        return transactionHistory;
     }
 
 
