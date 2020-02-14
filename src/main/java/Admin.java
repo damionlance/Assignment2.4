@@ -4,72 +4,89 @@ import java.util.List;
 
 public class Admin implements AdminAPI{
     private List<String> frozenAccountsIDs;
-    private String adminPassword;
-
+    private String adminPassword;//TODO:CREATE PASSWORD?
     private List<BankAccount> accounts;
-   // private ArrayList<Double> assets;//list of all assets for the user
-    //TODO:CHANGE JSON TO NOT READ ACCOUNT ID
+
     public Admin( String adminPasswordIn){
         this.adminPassword =adminPasswordIn;
-        this.frozenAccountsIDs =new ArrayList<>();//TODO:CHANGE
+        this.frozenAccountsIDs =new ArrayList<>();
         this.accounts=new ArrayList<>();
     }
-//TODO:ADD MAKE NEW ACCOUNT METHOD
 
+    /**
+     * Freezes an account by the account id so the bank account user cannot make any transactions
+     * @param acctId ID of the account that needs be frozen
+     */
     public void freezeAccount(String acctId) {
-        String freezeAccount=null;
-        BankAccount accountToFreeze = null;
-        for(BankAccount bankAccounts:accounts){
-            if(bankAccounts.getAcctId().equals(acctId)){
-               freezeAccount=bankAccounts.getAcctId();
-               accountToFreeze=bankAccounts;
-            }
-        }
-        if(freezeAccount.equals(null)){
-            throw new IllegalArgumentException("Account Id does not exist");
-
-        }
-        else{
-            frozenAccountsIDs.add(freezeAccount);
-            assert accountToFreeze != null;
+        BankAccount accountToFreeze = findAccountByID(accounts, acctId);
+        if (accountToFreeze !=null) {
+            frozenAccountsIDs.add(accountToFreeze.getAcctId());
             accountToFreeze.setAccountFrozen(true);
-        }
+            }
+        else
+            throw new IllegalArgumentException("Account Id does not exist");
     }
 
+    /**
+     * Unfreezes an account that has been frozen
+     * @param acctId ID of the account that is frozen
+     */
     public void unfreezeAcct(String acctId) {
         if(frozenAccountsIDs.contains(acctId)){
-            for(BankAccount account:accounts){
-                if(account.getAcctId().equals(acctId)){
-                    account.setAccountFrozen(false);
-                }
-            }
+           BankAccount account=findAccountByID(accounts,acctId);
+           account.setAccountFrozen(false);
         }
         else
             throw new IllegalArgumentException("Account does not exist");
-
     }
 
-    public double getAssetTotal() {
-        return 0;
-    }
-
-    public double calcTotalAssets() {
-        return 0;
-    }
-
-    public void setAccounts(List<BankAccount> accounts) {
-        this.accounts = accounts;
-    }
-    public BankAccount findAccountByID(String accID){
+    /**
+     * Helper functions to find bank accounts by their IDs
+     * @param accounts the current list of bank accounts
+     * @param accID ID of the bank account that needs to be found
+     * @return a bank account
+     */
+    public static BankAccount findAccountByID(List<BankAccount> accounts,String accID){
         for(BankAccount account:accounts){
             if(account.getAcctId().equals(accID)){
                 return account;
             }
-        }
-        return null;
+        }return null;
     }
+
+    public double calcTotalAssets() {
+        double totalBankAssets=0;
+        if(accounts!=null){
+            for(BankAccount bankAccount:accounts){
+                totalBankAssets+=bankAccount.getBalance();
+            }
+        }
+        return totalBankAssets;
+    }
+
+
+    public void setAccounts(List<BankAccount> accounts) {
+        this.accounts = accounts;
+    }
+
+
+
     public Collection<String> findAcctIdsWithSuspiciousActivity() {
         return null;
     }
 
 }
+ /* public double getAssetTotal() {
+
+        return calcTotalAssets(accounts);
+    }
+
+    public double calcTotalAssets(List<BankAccount> accounts) {
+        double totalBankAssets=0;
+        if(accounts!=null){
+            for(BankAccount bankAccount:accounts){
+                totalBankAssets+=bankAccount.getBalance();
+            }
+        }
+        return totalBankAssets;
+    }*/
