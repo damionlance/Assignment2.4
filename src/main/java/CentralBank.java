@@ -10,13 +10,17 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     //----------------- BasicAPI methods -------------------------//
 
     public boolean confirmCredentials(String acctId, String password) throws IOException, ParseException {
-        //just comparing on file accountID and password
 
+        //create bankaccount based on information from JSON
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
 
+        //string containing returnedAccount's account ID
         String acctIDonFile = returnedAccount.getAcctId();
+
+        //string containing returnedAccount's password
         String passwordOnFile = returnedAccount.getPassword();
 
+        //make sure acctID and password match each other in the JSON
         if(acctIDonFile.equals(acctId) && passwordOnFile.equals(password)){
 
             return true;
@@ -28,10 +32,13 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     public double checkBalance(String acctId) throws IOException, ParseException {
 
+        //copy account information from JSON based on accountID
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
 
+        //variable for balance of returnedAccount
         double accountBalance = returnedAccount.getBalance();
 
+        //updating
         String checkBalanceUpdate = "Checked balance. Balance at " + accountBalance + "\n";
         returnedAccount.updateTransactionHistory(checkBalanceUpdate);
 
@@ -50,14 +57,14 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
         if (amount > balance) {
             //change to insufficientFundsException
-            throw new RuntimeException("ERROR: You do not have enough funds to withdraw that amount.");
+            throw new InsufficientFundsException("ERROR: You do not have enough funds to withdraw that amount.");
         } else if (isAmountValid(amount)) {
             returnedAccount.withdraw(amount);
             //append action to transaction history
             String withdrawNotice = "Withdrew " + amount + " from account " + acctId + "\n";
             returnedAccount.updateTransactionHistory(withdrawNotice);
         } else {
-            throw new IllegalArgumentException("ERROR: Invalid withdraw amount");
+            throw new InsufficientFundsException("ERROR: Invalid withdraw amount");
 
         }
 
@@ -101,7 +108,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
             }
         } else {
             //fix dis
-            throw new RuntimeException();
+            throw new InsufficientFundsException("ERROR: Invalid withdraw amount");
         }
     }
 
