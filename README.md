@@ -11,7 +11,7 @@ Kandace: Finish Admin class and get on master
 
 # Class Diagram:
 
-![class_diagram](/imagesForReadme/class_diagram.png)
+![class_diagram](/imagesForReadme/class_diagram_update.png)
 
 # Use-Case Diagram:
 
