@@ -3,7 +3,10 @@ Assignment 2-4 for COMP 345
 
 ## To-do for friday
 Damion: add transaction history to JSON and fix sequence and class diagrams
+  (Worked on class diagram, but don't fully understand the arrows... If someone could finish that that would be great! https://drive.google.com/file/d/1-w9ax4F_uIlTQLcwL5PugJ4HKS4NTEDn/view?usp=sharing)
+
 Kelsey: Implement frozen / unfrozen integrated with bank account, fix ecxeption throwing in test
+
 Kandace: Finish Admin class and get on master
 
 # Class Diagram:
