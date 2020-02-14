@@ -5,13 +5,13 @@ Assignment 2-4 for COMP 345
 Damion: add transaction history to JSON and fix sequence and class diagrams
   (Worked on class diagram, but don't fully understand the arrows... If someone could finish that that would be great! https://drive.google.com/file/d/1-w9ax4F_uIlTQLcwL5PugJ4HKS4NTEDn/view?usp=sharing)
 
-Kelsey: Implement frozen / unfrozen integrated with bank account, fix ecxeption throwing in test
+Kelsey: figure out issue with maven, implement frozen / unfrozen integrated with bank account, fix exception throwing in test, finish class diagram w/ relationships.
 
 Kandace: Finish Admin class and get on master
 
 # Class Diagram:
 
-![class_diagram](/imagesForReadme/class_diagram.png)
+![class_diagram](/imagesForReadme/class_diagram_update.png)
 
 # Use-Case Diagram:
 
