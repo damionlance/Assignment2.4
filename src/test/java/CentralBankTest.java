@@ -199,13 +199,14 @@ class CentralBankTest {
 
     @Test
     void JSONReadWrite() throws IOException, org.json.simple.parser.ParseException {
-        BankAccount testAccount = new BankAccount(500, "123", "myPassword", "");
+        BankAccount testAccount = new BankAccount(500, "123", "myPassword", "test");
 
         //valid account Id
         json.writeAccountToJSON(testAccount);
         BankAccount returnedAccount = json.readAccountFromJSON("123");
         assertEquals(testAccount.getBalance(), returnedAccount.getBalance());
         assertEquals(testAccount.getPassword(), returnedAccount.getPassword());
+        assertEquals(testAccount.getTransactionHistory(), returnedAccount.getTransactionHistory());
 
         //invalid account Id
         assertThrows(FileNotFoundException.class, ()->json.readAccountFromJSON("99999999"));
