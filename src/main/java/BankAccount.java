@@ -5,6 +5,9 @@ public class BankAccount {
     private String password;
     private double balance;
 
+
+    private boolean accountFrozen=false;
+
     /**
      * @throws IllegalArgumentException if email is invalid
      */
@@ -46,21 +49,26 @@ public class BankAccount {
      * @throws InsufficientFundsException if amount is bigger than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException {
-        if (amount > balance){ // Cannot withdraw an amount more than the balance
-            throw new InsufficientFundsException("Too small a balance");
-        }
-        if (amount < 0) { // Cannot withdraw an amount less than 0
-            throw new IllegalArgumentException("Cannot withdraw a negative amount");
-        }
-        String amountString = "" + amount;
-        if (amountString.indexOf(".") != -1) {
-            String places = amountString.substring(amountString.indexOf("."), amountString.length() - 1);
-            if (places.length() > 2){
-                throw new IllegalArgumentException("Cannot have more than 0.01 precision");
+        if (!accountFrozen) {
+            if (amount > balance) { // Cannot withdraw an amount more than the balance
+                throw new InsufficientFundsException("Too small a balance");
             }
+            if (amount < 0) { // Cannot withdraw an amount less than 0
+                throw new IllegalArgumentException("Cannot withdraw a negative amount");
+            }
+            String amountString = "" + amount;
+            if (amountString.indexOf(".") != -1) {
+                String places = amountString.substring(amountString.indexOf("."), amountString.length() - 1);
+                if (places.length() > 2) {
+                    throw new IllegalArgumentException("Cannot have more than 0.01 precision");
+                }
+            }
+            balance -= amount;
+            balance = (double) Math.round(balance * 100.0) / 100.0;
         }
-        balance -= amount;
-        balance = (double) Math.round(balance * 100.0) / 100.0;
+        else{
+            throw new IllegalArgumentException("Account is frozen");
+        }
     }
 
 
@@ -120,11 +128,15 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount invalid
      */
     public void deposit(double depositAmount){
-        if(isAmountValid(depositAmount)){
-            balance += depositAmount;
+        if(!accountFrozen) {
+            if (isAmountValid(depositAmount)) {
+                balance += depositAmount;
+            } else {
+                throw new IllegalArgumentException("");
+            }
         }
-        else {
-            throw new IllegalArgumentException("");
+        else{
+            throw new IllegalArgumentException("Account is frozen");
         }
     }
 
@@ -135,6 +147,10 @@ public class BankAccount {
      */
     public static void transfer(BankAccount accountToTransfer, double amountToTransfer){
 
+    }
+
+    public void setAccountFrozen(boolean accountFrozen) {
+        this.accountFrozen = accountFrozen;
     }
 
 }
