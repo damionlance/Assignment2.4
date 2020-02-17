@@ -10,27 +10,61 @@ public class AdminTest {
             "ValidCustomer2", "ValidCustomer3");
     @Test
     void freezeBankAccountTest() throws IllegalArgumentException{
-        BankAccount bankAccount1=JsonForTests.readAccountFromJSON(this.validAcc.get(0));
-        Admin admin1= new Admin("tempAdminPassword");//make a list of accepted admin passwords
-     //   admin1.freezeAccount(bankAccount1.getAcctId());
+        Admin admin1= new Admin("tempAdminPassword");//TODO:make a list of accepted admin passwords?
+        List<BankAccount> accounts=Arrays.asList(JsonForTests.readAccountFromJSON(validAcc.get(0)),
+                JsonForTests.readAccountFromJSON(validAcc.get(1)),JsonForTests.readAccountFromJSON(validAcc.get(2)));
+        admin1.setAccounts(accounts);
+        BankAccount bankAccount1=accounts.get(0);
 
+        admin1.freezeAccount(bankAccount1.getAcctId());
 
+        assertThrows(IllegalArgumentException.class,()->bankAccount1.withdraw(1));
+        assertThrows(IllegalArgumentException.class,()->bankAccount1.deposit(30));
 
     }
 
     @Test
-    void unfreezeBankAccountTest(){
+    void unfreezeBankAccountTest()throws InsufficientFundsException{
+        Admin admin1= new Admin("tempAdminPassword");
+        List<BankAccount> accounts=Arrays.asList(JsonForTests.readAccountFromJSON(validAcc.get(0)),
+                JsonForTests.readAccountFromJSON(validAcc.get(1)),JsonForTests.readAccountFromJSON(validAcc.get(2)));
 
+        admin1.setAccounts(accounts);
+        BankAccount bankAccount1=accounts.get(0);
+        admin1.freezeAccount(bankAccount1.getAcctId());
+
+        assertThrows(IllegalArgumentException.class,()->bankAccount1.withdraw(1));
+        assertThrows(IllegalArgumentException.class,()->bankAccount1.deposit(30));
+        admin1.unfreezeAcct(bankAccount1.getAcctId());
+
+        bankAccount1.deposit(20);
+        assertEquals(520.0,bankAccount1.getBalance());
+        bankAccount1.withdraw(20);
+        assertEquals(500,bankAccount1.getBalance());
     }
+
     @Test
-
-    void findAcctIdsWithSuspiciousActivity(){
-
+    void calcTotalBankAssetsTest(){
+        Admin admin1= new Admin("tempAdminPassword");
+        List<BankAccount> accounts=Arrays.asList(JsonForTests.readAccountFromJSON(validAcc.get(0)),
+                JsonForTests.readAccountFromJSON(validAcc.get(1)),JsonForTests.readAccountFromJSON(validAcc.get(2)));
+        admin1.setAccounts(accounts);
+        assertEquals(1350.0,admin1.calcTotalAssets());
     }
+
+/*
     @Test
-    void calcTotalAssets(){
+    void findAccountByIDTest(){
+        Admin admin1= new Admin("tempAdminPassword");
+        List<BankAccount> accounts=Arrays.asList(JsonForTests.readAccountFromJSON(validAcc.get(0)),
+                JsonForTests.readAccountFromJSON(validAcc.get(1)),JsonForTests.readAccountFromJSON(validAcc.get(2)));
+        admin1.setAccounts(accounts);
 
     }
-//TODO:DELETE JSON FILE IN CENTRAL BANK TEST FILE
+*/
 
+    @Test
+    void findAcctIdsWithSuspiciousActivityTest(){
+
+    }
 }
