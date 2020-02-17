@@ -7,6 +7,7 @@ import java.io.*;
 
 public class json {
 
+
     public static void writeAccountToJSON(BankAccount accountToWrite){
         JSONObject obj = new JSONObject();
         obj.put("acctId", accountToWrite.getAcctId());
@@ -30,7 +31,7 @@ public class json {
         String acctIdRead = (String) jsonObject.get("acctId");
         double balance = (double) jsonObject.get("balance");
 
-        BankAccount returnAccount = new BankAccount(balance, acctIdRead, password, "");
+        BankAccount returnAccount = new BankAccount(balance, acctIdRead, password,"");
         return returnAccount;
     }
 
