@@ -40,26 +40,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     }
 
     public void withdraw(String acctId, double amount) throws IllegalArgumentException, IOException, ParseException, InsufficientFundsException {
-        String amountString = Double.toString(Math.abs(amount));
-        String[] splitter = amountString.toString().split("\\.");
-        splitter[0].length();   // Before Decimal Count
-        splitter[1].length();   // After  Decimal Count
-
-        BankAccount returnedAccount = json.readAccountFromJSON(acctId);
-        double balance = returnedAccount.getBalance();
-
-        if (amount > balance) {
-            //change to insufficientFundsException
-            throw new RuntimeException("ERROR: You do not have enough funds to withdraw that amount.");
-        } else if (isAmountValid(amount)) {
-            returnedAccount.withdraw(amount);
-            //append action to transaction history
-            String withdrawNotice = "Withdrew " + amount + " from account " + acctId + "\n";
-            returnedAccount.updateTransactionHistory(withdrawNotice);
-        } else {
-            throw new IllegalArgumentException("ERROR: Invalid withdraw amount");
-
-        }
 
     }
 
