@@ -46,6 +46,7 @@ class CentralBankTest {
         BankAccount bankAccount4 = new BankAccount(1.0, "qrst", "7890", "");
         BankAccount bankAccount5 = new BankAccount(0.01, "yzabc", "67890", "");
 
+
         assertEquals(100, bankAccount.getBalance());
         assertEquals(1, bankAccount1.getBalance()); //border
         assertEquals(1.00, bankAccount2.getBalance());
@@ -237,16 +238,8 @@ class CentralBankTest {
         //valid account - valid starting balance (only way for account to be valid right now)
         bank.createAccount("12345", 500, "password");
         BankAccount account = json.readAccountFromJSON("12345");
-        assertEquals(500, account.getBalance());
 
-        //invalid account - invalid starting balance
-        assertThrows(IllegalArgumentException.class, ()->bank.createAccount("12345", 0, "pass"));
-
-    }
-
-    @Test
-    void closeAccount() throws FileNotFoundException {
-        CentralBank bank = new CentralBank();
+        assertEquals(account.getBalance(), 500);
 
         //valid account
         bank.createAccount("12345", 500, "password");

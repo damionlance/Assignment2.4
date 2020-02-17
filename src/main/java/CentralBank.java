@@ -47,6 +47,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     }
 
     public void withdraw(String acctId, double amount) throws IllegalArgumentException, IOException, ParseException, InsufficientFundsException {
+
         String amountString = Double.toString(Math.abs(amount));
         String[] splitter = amountString.toString().split("\\.");
         splitter[0].length();   // Before Decimal Count
@@ -67,6 +68,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
             throw new InsufficientFundsException("ERROR: Invalid withdraw amount");
 
         }
+
 
     }
 
