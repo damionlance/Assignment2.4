@@ -1,0 +1,19 @@
+[
+  {"password":"myPassword",
+    "balance":500.0,
+    "acctId":"InValidCustomer1",
+    "email":"testAcc1.@c.com"}
+  ,
+  {"password":"myPassword",
+    "balance":-800.0,
+    "acctId":"InValidCustomer1",
+    "email":"testAcc2@c.com"}
+  ,
+
+  {"password":" ",
+    "balance":500.0,
+    "acctId":"InValidCustomer1",
+    "email":"testAcc1.@c.com"}
+]
+
+//TODO:CHANGE FROM LIST TO SINGLE FILES?

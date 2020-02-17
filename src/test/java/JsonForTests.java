@@ -11,9 +11,9 @@ public class JsonForTests {
     public static void writeAccountToJSON(BankAccount accountToWrite){
         JSONObject obj = new JSONObject();
         obj.put("acctId", accountToWrite.getAcctId());
-        obj.put("email", accountToWrite.getEmail());
         obj.put("password", accountToWrite.getPassword());
         obj.put("balance", accountToWrite.getBalance());
+        obj.put("transactionHist", accountToWrite.getTransactionHistory());
 
         try (FileWriter file = new FileWriter("src/test/resources/" + accountToWrite.getAcctId() + ".json")) {
             file.write(obj.toJSONString());
@@ -32,8 +32,9 @@ public class JsonForTests {
             String password = (String) jsonObject.get("password");
             String acctIdRead = (String) jsonObject.get("acctId");
             double balance = (double) jsonObject.get("balance");
+            String transactionHist = (String) jsonObject.get("transactionHist");
 
-            BankAccount returnAccount = new BankAccount(email, balance, acctIdRead, password,"");
+            BankAccount returnAccount = new BankAccount(balance, acctIdRead, password, transactionHist);
             return returnAccount;
         }
         catch (IOException e){
