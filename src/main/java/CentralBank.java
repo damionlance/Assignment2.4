@@ -107,6 +107,9 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
                 String recieveTransferNotice = "Received $" + amount + " from " + acctIdToWithdrawFrom + "\n";
                 getAccount.updateTransactionHistory(recieveTransferNotice);
+
+                json.writeAccountToJSON(giveAccount);
+                json.writeAccountToJSON(getAccount);
             }
         } else {
             //fix dis
@@ -194,5 +197,11 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         }
         return files;
     }
-
+    public static CentralBank testBank(){
+        CentralBank myBank = new CentralBank();
+        myBank.createAccount("111", 1000, "password");
+        myBank.createAccount("222", 29, "password");
+        myBank.createAccount("333", 7.06, "password");
+        return myBank;
+    }
 }
