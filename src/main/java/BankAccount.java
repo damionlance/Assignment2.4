@@ -135,4 +135,7 @@ public class BankAccount {
     }
 
 
+    public boolean isFrozen() {
+        return false;
+    }
 }
