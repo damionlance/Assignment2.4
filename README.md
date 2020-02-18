@@ -9,6 +9,10 @@ Kelsey: figure out issue with maven, implement frozen / unfrozen integrated with
 
 Kandace: Finish Admin class and get on master
 
+# State Diagram:
+
+![State_Diagram](/imagesForReadme/State_Diagram.png)
+
 # Class Diagram:
 
 ![class_diagram](/imagesForReadme/class_diagram_update.png)
