@@ -4,11 +4,9 @@ import java.util.List;
 
 public class Admin implements AdminAPI{
     private List<String> frozenAccountsIDs;
-    private String adminPassword;//TODO:CREATE PASSWORD?
     private List<BankAccount> accounts;
 
-    public Admin( String adminPasswordIn){
-        this.adminPassword =adminPasswordIn;
+    public Admin(){
         this.frozenAccountsIDs =new ArrayList<>();
         this.accounts=new ArrayList<>();
     }
@@ -21,7 +19,7 @@ public class Admin implements AdminAPI{
         BankAccount accountToFreeze = findAccountByID(accounts, acctId);
         if (accountToFreeze !=null) {
             frozenAccountsIDs.add(accountToFreeze.getAcctId());
-            accountToFreeze.setAccountFrozen(true);
+            //accountToFreeze.setAccountFrozen(true);
         }
         else
             throw new IllegalArgumentException("Account Id does not exist");
@@ -34,7 +32,7 @@ public class Admin implements AdminAPI{
     public void unfreezeAcct(String acctId) {
         if(frozenAccountsIDs.contains(acctId)){
             BankAccount account=findAccountByID(accounts,acctId);
-            account.setAccountFrozen(false);
+            //account.setAccountFrozen(false);
         }
         else
             throw new IllegalArgumentException("Account does not exist");
@@ -73,6 +71,12 @@ public class Admin implements AdminAPI{
 
     public Collection<String> findAcctIdsWithSuspiciousActivity() {
         return null;
+    }
+
+    public Collection<String> getFrozenAccounts(){
+
+        return frozenAccountsIDs;
+
     }
 
 }

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 public class CentralBank implements AdvancedAPI, AdminAPI {
+    Admin a = new Admin();
 
     //----------------- BasicAPI methods -------------------------//
 
@@ -56,6 +58,10 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         BankAccount returnedAccount = json.readAccountFromJSON(acctId);
         double balance = returnedAccount.getBalance();
 
+        if (a.getFrozenAccounts().contains(acctId)){
+            throw new RuntimeException("ERROR: Account is frozen");
+        }
+
         if (amount > balance) {
             //change to insufficientFundsException
             throw new InsufficientFundsException("ERROR: You do not have enough funds to withdraw that amount.");
@@ -73,6 +79,11 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     }
 
     public void deposit(String acctId, double amount) throws IOException, ParseException {
+
+        if (a.getFrozenAccounts().contains(acctId)){
+            throw new RuntimeException("ERROR: Account is frozen");
+        }
+
         if (isAmountValid(amount)) {
             BankAccount returnedAccount = json.readAccountFromJSON(acctId);
             returnedAccount.deposit(amount);
@@ -87,6 +98,15 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     }
 
     public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException, IOException, ParseException {
+
+        if (a.getFrozenAccounts().contains(acctIdToWithdrawFrom)){
+            throw new RuntimeException("ERROR: Account is frozen");
+        }
+
+        else if (a.getFrozenAccounts().contains(acctIdToDepositTo)){
+            throw new RuntimeException("ERROR: Account you're trying to transfer to is frozen.");
+        }
+
         if (isAmountValid(amount)) {
 
             BankAccount giveAccount = json.readAccountFromJSON(acctIdToWithdrawFrom);
